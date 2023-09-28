@@ -23,35 +23,32 @@ Put or write the user story here. Add any clarifying notes you might have.
 2. Design the Class System
 Consider diagramming out the classes and their relationships. Take care to focus on the details you see as important, not everything. The diagram below uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com
 
- ┌────────────────────────────────────────┐
- │ class Takeaway()                       │
- │    self.menu = {item:cost, ...}        │
- │    self.order_history = []             │
- │                                        │
- │  generate_order_number()               │
- │    generates unique order number for   │
- │    instance of create_order            │
- │                                        │
- │  get_menu()                            │
- │    returns self.menu                   │
- │                                        │
- │  create_order(order_number, name)      │
- │    creates new instance of Order class │
- │                                        │
- │  print_receipt(order_number)           │
- │   prints nicely formatted reciept      │
- │   listing all items and grand total    │
- │   in order                             │
- │                                        │
- │  confirm_order(order_number)           │
- │    confirms order by  SMS              │
- │    use twilio API                      │
- │                                        │
- └───────┬─▲──────────────────────────────┘
+ ┌─────────────────────────────────────────────────────────────┐
+ │ class Takeaway()                                            │
+ │    self.menu = {item:cost, ...}                             │
+ │    self.used_order_numbers = []                             │
+ │                                                             │
+ │  get_menu()                                                 │
+ │    returns self.menu                                        │
+ │                                                             │
+ │  create_order(order_number, name)                           │
+ │    creates new instance of Order class                      │
+ │                                                             │
+ │  print_receipt(order_number)                                │
+ │   prints nicely formatted reciept                           │
+ │   listing all items and grand total                         │
+ │   in order                                                  │
+ │                                                             │
+ │  confirm_order(order_number)                                │
+ │    confirms order by  SMS                                   │
+ │    use twilio API                                           │
+ │                                                             │
+ └───────┬─▲───────────────────────────────────────────────────┘
+         │ │
          │ │
   ┌──────▼─┴───────────────────────────┐
-  │ class Order(name)                  │
-  │   self.order_number = str          │
+  │ class Order(order_number, name)    │
+  │   self.order_number = order_number │
   │                                    │
   │   self.name = name                 │
   │                                    │
@@ -63,16 +60,7 @@ Consider diagramming out the classes and their relationships. Take care to focus
   │ add(item)                          │
   │  adds item from menu to self.items │
   │  adds cost from menu to self.total │
-  │                                    │
-  │                                    │
-  │                                    │
-  │                                    │
-  │                                    │
   └────────────────────────────────────┘
-
-Also design the interface of each class in more detail.
-
-
 
 3. Create Examples as Integration Tests
 Create examples of the classes being used together in different situations and combinations that reflect the ways in which the system will be used.
@@ -80,28 +68,25 @@ Create examples of the classes being used together in different situations and c
 # EXAMPLE
 
 """
-Given a library
-When we add two tracks
-We see those tracks reflected in the tracks list
+Given a customer name
+create_order() creates an instance of Order() with self.name stored and unique order number
 """
-library = MusicLibrary()
-track_1 = Track("Carte Blanche", "Veracocha")
-track_2 = Track("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
-library.add(track_2)
-library.tracks # => [track_1, track_2]
-4. Create Examples as Unit Tests
-Create examples, where appropriate, of the behaviour of each relevant class at a more granular level of detail.
-
-# EXAMPLE
+def test_creates_order_with_name_stored()
+    takeaway = Takeaway()
+    order_number = generate_order_number()
+    order_number.value = takeaway.create_order("Jack")
+    assert jacks_order.name == "Jack"
 
 """
-Given a track with a title and an artist
-We see the title reflected in the title property
+Given and order of multiple items
+print_receipt() returns a nicely formatted receipt listing all items, costs and grand total
 """
-track = Track("Carte Blanche", "Veracocha")
-track.title # => "Carte Blanche"
-Encode each example as a test. You can add to the above list as you go.
+def test_print_receipt_returns_correctly():
+    takeaway = Takeaway()
+    jacks_order = takeaway.create_order("Jack")
+    jacks_order.add(takeaway.menu['chips'])
+    jacks_order.add(takeaway.menu['burger'])
+    assert jacks_order.print_receipt() == .....
 
 5. Implement the Behaviour
 After each test you write, follow the test-driving process of red, green, refactor to implement the behaviour.
