@@ -26,7 +26,6 @@ Consider diagramming out the classes and their relationships. Take care to focus
  ┌─────────────────────────────────────────────────────────────┐
  │ class OrderGenerator()                                      │
  │                                                             │
- │    self.used_order_numbers = []                             │
  │                                                             │
  │  get_menu()                                                 │
  │    returns self.menu                                        │

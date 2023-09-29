@@ -13,6 +13,16 @@ def test_initialises_with_correct_values():
     assert order1.total == 0
 
 """
+Given an empty order
+get_menu() returns the menu as dict
+"""
+def test_get_menu_returns_correctly():
+    order1 = Order(1, "Jack")
+    assert order1.get_menu() == {"Cheeseburger": 6, "Fries": 3, "Hotdog": 5, 
+                                 "Pizza": 8, "Fried chicken": 7, "Milkshake": 4, 
+                                 "Coke": 2}
+
+"""
 Given multiple items
 Adds items to the order and correctly calculates total
 """
