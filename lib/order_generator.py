@@ -23,7 +23,7 @@ class OrderGenerator:
         current_time = datetime.now()
         delivery_time = (current_time + timedelta(minutes=30)).strftime("%H:%M")
         message = client.messages.create(
-        to="+447577718156", 
+        to=os.environ["MY_PHONE_NUMBER"], 
         from_=os.environ['TWILIO_PHONE_NUMBER'],
         body= f"Thank you for your order. Please expect delivery by {delivery_time}\n" + order.print_receipt())
         return(message.sid)
