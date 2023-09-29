@@ -1,20 +1,29 @@
 from lib.order import Order
+from twilio.rest import Client
+from dotenv import load_dotenv
+import os
+from datetime import *
+
+load_dotenv()
+
+# Your Account SID from twilio.com/console
+account_sid = os.environ["TWILIO_ACCOUNT_SID"]
+# Your Auth Token from twilio.com/console
+auth_token  = os.environ["TWILIO_ACCOUNT_AUTH_TOKEN"]
+
+client = Client(account_sid, auth_token)
 
 class OrderGenerator:
-
-    def __init__(self):
-        pass
 
     def create_order(self, order_number, name):
         order = Order(order_number, name)
         return order
     
-    def print_receipt(self, order):
-        item_list = order.items
-        total = order.total
-        receipt = f"Order number: {order.order_number}\nCustomer name: {order.name}\n"
-        for item in item_list:
-            receipt += f"{item}: £{order.items[item]}" + "\n"
-        receipt += f"The total cost of your order is: £{total}"
-        return receipt
-
+    def confirm_order(self, order):
+        current_time = datetime.now()
+        delivery_time = (current_time + timedelta(minutes=30)).strftime("%H:%M")
+        message = client.messages.create(
+        to="+447577718156", 
+        from_=os.environ['TWILIO_PHONE_NUMBER'],
+        body= f"Thank you for your order. Please expect delivery by {delivery_time}\n" + order.print_receipt())
+        return(message.sid)

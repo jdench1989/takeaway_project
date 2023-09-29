@@ -1,5 +1,6 @@
-from lib.order_generator import *
-from lib.order import *
+from lib.order_generator import OrderGenerator
+from lib.order import Order
+import twilio
 
 """
 Given a customer name and order number
@@ -34,10 +35,24 @@ def test_print_receipt_correctly_returns_formatted_receipt():
     order1234.add("Cheeseburger")
     order1234.add("Milkshake")
     order1234.add("Coke")
-    receipt = generator.print_receipt(order1234)
+    receipt = order1234.print_receipt()
     assert receipt == ("Order number: 1234\n"
                        "Customer name: Jack Dench\n"
                        "Cheeseburger: £6\n"
                        "Milkshake: £4\n"
                        "Coke: £2\n"
                        "The total cost of your order is: £12")
+
+"""
+Given an order of multiple items
+confirm_order() sends an SMS via Twilio including an expected delivery time
+and a receipt for the order
+"""
+def test_confirm_order_send_SMS():
+    generator = OrderGenerator()
+    order1234 = generator.create_order(1234, "Jack Dench")
+    order1234.add("Cheeseburger")
+    order1234.add("Milkshake")
+    order1234.add("Coke")
+    message_sid = generator.confirm_order(order1234)
+    assert message_sid 

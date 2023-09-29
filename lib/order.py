@@ -13,3 +13,12 @@ class Order:
     def add(self, item):
         self.items.update({item:self.menu[item]})
         self.total = sum(self.items.values())
+
+    def print_receipt(self):
+        item_list = self.items
+        total = self.total
+        receipt = f"Order number: {self.order_number}\nCustomer name: {self.name}\n"
+        for item in item_list:
+            receipt += f"{item}: £{self.items[item]}" + "\n"
+        receipt += f"The total cost of your order is: £{total}"
+        return receipt

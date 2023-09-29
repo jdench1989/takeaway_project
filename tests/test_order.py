@@ -32,3 +32,19 @@ def test_adds_item_and_calculates_total():
     order1.add("Milkshake")
     assert order1.items == {"Hotdog": 5, "Milkshake": 4}
     assert order1.total == 9
+
+    """
+Given an order of mutiple items
+print_receipt returns a nicely formatted list of the items and their prices
+as well as a total amount
+"""
+def test_mock_print_receipt_returns_correct():
+    order1 = Order(1, "Jack Dench")
+    order1.add("Cheeseburger")
+    order1.add("Fries")
+    order1.add("Milkshake")
+    receipt = order1.print_receipt()
+    assert "Cheeseburger: £6" in receipt
+    assert "Fries: £3" in receipt
+    assert "Milkshake: £4" in receipt
+    assert "The total cost of your order is: £13" in receipt
