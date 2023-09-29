@@ -1,7 +1,7 @@
 from lib.order import *
 
 """
-Given a order number and customer name
+Given an order number and customer name
 Initialises with name and number stored as attributes
 and self.items as empty dict and self.total as 0
 """
@@ -18,7 +18,7 @@ Adds items to the order and correctly calculates total
 """
 def test_adds_item_and_calculates_total():
     order1 = Order(1, "Jack")
-    order1.add({"Hotdog": 3})
-    order1.add({"Milkshake": 2})
-    assert order1.items == {"Hotdog": 3, "Milkshake": 2}
-    assert order1.total == 5
+    order1.add("Hotdog")
+    order1.add("Milkshake")
+    assert order1.items == {"Hotdog": 5, "Milkshake": 4}
+    assert order1.total == 9

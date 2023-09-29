@@ -24,8 +24,8 @@ Put or write the user story here. Add any clarifying notes you might have.
 Consider diagramming out the classes and their relationships. Take care to focus on the details you see as important, not everything. The diagram below uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com
 
  ┌─────────────────────────────────────────────────────────────┐
- │ class Takeaway()                                            │
- │    self.menu = {item:cost, ...}                             │
+ │ class OrderGenerator()                                      │
+ │                                                             │
  │    self.used_order_numbers = []                             │
  │                                                             │
  │  get_menu()                                                 │
@@ -35,7 +35,7 @@ Consider diagramming out the classes and their relationships. Take care to focus
  │    creates new instance of Order class                      │
  │                                                             │
  │  print_receipt(order_number)                                │
- │   prints nicely formatted reciept                           │
+ │   prints nicely formatted receipt                           │
  │   listing all items and grand total                         │
  │   in order                                                  │
  │                                                             │
@@ -47,7 +47,10 @@ Consider diagramming out the classes and their relationships. Take care to focus
          │ │
          │ │
   ┌──────▼─┴───────────────────────────┐
-  │ class Order(order_number, name)    │
+  │ class Order(order_number, name)    |
+  |                                    |
+  |   self.menu = {item:cost, ...}     | 
+  |                                    │
   │   self.order_number = order_number │
   │                                    │
   │   self.name = name                 │
