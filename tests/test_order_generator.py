@@ -17,3 +17,8 @@ def test_mock_create_order_correctly_instantiates():
     assert mock_order.name == "Jack"
     assert mock_order.order_number == 1
 
+"""
+Given an order of multiple items
+confirm_order() generates an appropriate message and sends as SMS via Twilio
+Using Mock for independent unit testing
+"""

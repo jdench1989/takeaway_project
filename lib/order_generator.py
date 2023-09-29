@@ -26,4 +26,4 @@ class OrderGenerator:
         to=os.environ["MY_PHONE_NUMBER"], 
         from_=os.environ['TWILIO_PHONE_NUMBER'],
         body= f"Thank you for your order. Please expect delivery by {delivery_time}\n" + order.print_receipt())
-        return(message.sid)
+        return message.sid

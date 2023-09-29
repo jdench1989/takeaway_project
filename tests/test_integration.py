@@ -55,4 +55,5 @@ def test_confirm_order_send_SMS():
     order1234.add("Milkshake")
     order1234.add("Coke")
     message_sid = generator.confirm_order(order1234)
-    assert message_sid 
+    # assert message_sid != None
+    assert message_sid is not None

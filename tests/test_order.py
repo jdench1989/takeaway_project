@@ -33,7 +33,7 @@ def test_adds_item_and_calculates_total():
     assert order1.items == {"Hotdog": 5, "Milkshake": 4}
     assert order1.total == 9
 
-    """
+"""
 Given an order of mutiple items
 print_receipt returns a nicely formatted list of the items and their prices
 as well as a total amount
